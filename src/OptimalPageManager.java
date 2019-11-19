@@ -1,6 +1,4 @@
 import java.util.HashSet;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 public class OptimalPageManager extends PageReplacementManager {
 
@@ -21,17 +19,14 @@ public class OptimalPageManager extends PageReplacementManager {
 
         for (int i = pageIndex; i < this.getNumberOfPages(); i++) {
             if (this.frames.contains(this.getPages()[i])) {
-
                 if (checkSet.size() < this.getNumberOfFrames())
                 checkSet.add(this.getPages()[i]);
-
                 if (i > farthest) {
                     farthest = i;
                     page = i;
                 }
-
             }
-            if (i == this.getNumberOfPages() - 1 || checkSet.size() == this.getNumberOfPages() - 1) {
+            if (i == this.getNumberOfPages() - 1 || checkSet.size() == this.getNumberOfFrames() - 1) {
                 for (int framePage : this.frames) {
                     if (!checkSet.contains(framePage)) {
                         return framePage;
@@ -59,7 +54,6 @@ public class OptimalPageManager extends PageReplacementManager {
                     frames.remove(pageToRemove);
                     frames.add(this.getPages()[i]);
                     pageFaults++;
-
                 }
 
             }

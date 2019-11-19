@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 abstract class PageReplacementManager {
     private int numberOfPages;
     private int numberOfFrames;
