@@ -4,6 +4,11 @@ public class OptimalPageManager extends PageReplacementManager {
 
     private HashSet<Integer> frames;
 
+    /**
+     * @param numberOfPages
+     * @param numberOfFrames
+     * @param pages
+     */
     OptimalPageManager(int numberOfPages, int numberOfFrames, int[] pages) {
         this.setNumberOfPages(numberOfPages);
         this.setNumberOfFrames(numberOfFrames);
@@ -12,6 +17,10 @@ public class OptimalPageManager extends PageReplacementManager {
         this.frames = new HashSet<>(this.getNumberOfFrames());
     }
 
+    /**
+     * @param pageIndex
+     * @return page
+     */
     int predict(int pageIndex) {
         HashSet<Integer> checkSet = new HashSet<>();
         int page = -1;
@@ -37,6 +46,9 @@ public class OptimalPageManager extends PageReplacementManager {
         return (page == -1) ? 0: page;
     }
 
+    /**
+     * @return pageFaults
+     */
     @Override
     int getPageFaults() {
         int pageFaults = 0;

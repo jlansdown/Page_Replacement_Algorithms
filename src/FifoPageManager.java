@@ -4,12 +4,21 @@ import java.util.Queue;
 
 public class FifoPageManager extends PageReplacementManager {
 
+
+    /**
+     * @param numberOfPages
+     * @param numberOfFrames
+     * @param pages
+     */
     FifoPageManager(int numberOfPages, int numberOfFrames, int[] pages) {
         this.setNumberOfPages(numberOfPages);
         this.setNumberOfFrames(numberOfFrames);
         this.setPages(pages);
     }
 
+    /**
+     * @return pageFaults
+     */
     @Override
     int getPageFaults() {
         HashSet<Integer> frames = new HashSet<>(this.getNumberOfFrames());

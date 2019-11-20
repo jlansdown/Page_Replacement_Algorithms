@@ -3,8 +3,9 @@ import java.util.Random;
 public class Main {
 
 
-
-
+    /**
+     * @param numberOfFrames
+     */
     public static void printAverage(int numberOfFrames) {
 
         int[] pages = new int[30];
@@ -18,7 +19,10 @@ public class Main {
 
         Random random = new Random();
 
+
+
         for (int i = 0; i < trials; i++) {
+
 
             for (int j = 0; j < references; j++)
                 pages[j] = random.nextInt(10);
@@ -33,9 +37,9 @@ public class Main {
             optResult += opt.getPageFaults();
         }
 
-        System.out.println(numberOfFrames + "-frame fifo result: " + (fifoResult / trials));
-        System.out.println(numberOfFrames + "-frame lru result: " + (lruResult / trials));
-        System.out.println(numberOfFrames + "-frame opt result: " + (optResult / trials) + "\n\n");
+        System.out.println(numberOfFrames + "-frame fifo average: " + (fifoResult / trials));
+        System.out.println(numberOfFrames + "-frame lru average: " + (lruResult / trials));
+        System.out.println(numberOfFrames + "-frame opt average: " + (optResult / trials) + "\n\n");
     }
 
 

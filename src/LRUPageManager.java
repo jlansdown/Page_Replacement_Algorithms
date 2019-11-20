@@ -4,12 +4,20 @@ import java.util.Iterator;
 
 public class LRUPageManager extends PageReplacementManager {
 
+    /**
+     * @param numberOfPages
+     * @param numberOfFrames
+     * @param pages
+     */
     LRUPageManager(int numberOfPages, int numberOfFrames, int[] pages) {
         this.setNumberOfPages(numberOfPages);
         this.setNumberOfFrames(numberOfFrames);
         this.setPages(pages);
     }
 
+    /**
+     * @return pageFaults
+     */
     @Override
     int getPageFaults() {
         HashSet<Integer> frames = new HashSet<>(this.getNumberOfFrames());
@@ -49,7 +57,6 @@ public class LRUPageManager extends PageReplacementManager {
                 referenceMap.put(this.getPages()[i], i);
             }
         }
-
         return page_faults;
     }
 }
