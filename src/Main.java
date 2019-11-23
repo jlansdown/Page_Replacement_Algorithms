@@ -28,7 +28,7 @@ public class Main {
     }
 
     /**
-     *
+     * Prints the average turn around time using files 1 - 4
      */
     private void printAverages() throws IOException {
         fileProcessor = new FileProcessor(jobFile);
@@ -49,6 +49,11 @@ public class Main {
 
     }
 
+    /**
+     * Prints the averages for 50 trials
+     * @throws IOException if user enters wrong filename or
+     * file does not exist.
+     */
     private void printRandomAverages() throws IOException {
         int trials = 50;
         double fifoResult = 0;
@@ -67,6 +72,7 @@ public class Main {
             convertedJobFile = fileProcessor.convertJobFileToArray();
             numberOfFrames = convertedJobFile[0];
 
+            //first element used for number of frames
             for (int j = 0; j < numberOfPages; j++)
                 pages[j] = convertedJobFile[j + 1];
 
@@ -80,6 +86,7 @@ public class Main {
             optResult += opt.getPageFaults();
         }
 
+        //Average calculated at end of print parameter
         System.out.println("\n" + numberOfFramesForRandomTrials + "-frame fifo average: " + (fifoResult / trials));
         System.out.println(numberOfFramesForRandomTrials + "-frame lru average: " + (lruResult / trials));
         System.out.println(numberOfFramesForRandomTrials + "-frame opt average: " + (optResult / trials) + "\n\n");

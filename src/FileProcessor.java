@@ -8,11 +8,8 @@ public class FileProcessor {
     private int numberOfReferences;
     private int arrayPosition = 0;
     private boolean testRandomTrials = false;
-    String numberOfFramesForRandomTrials = "";
+    private String numberOfFramesForRandomTrials = "";
 
-    /**
-     * @param jobFile
-     */
     public FileProcessor(File jobFile) {
         this.file = jobFile;
         this.numberOfReferences = 31;
@@ -27,7 +24,7 @@ public class FileProcessor {
 
     /**
      * @return referencesAsIntegers
-     * @throws FileNotFoundException if file not found
+     * @throws IOException if file does not exist
      */
     public int[] convertJobFileToArray() throws IOException {
         int[] referencesAsIntegers = new int[this.numberOfReferences];
@@ -50,6 +47,10 @@ public class FileProcessor {
         return referencesAsIntegers;
     }
 
+    /**
+     * @param numberOfFrames needed for this method because file 5.txt is repeatedly overwritten
+     * @throws IOException if file does not exist
+     */
     private void createRandomReferenceString(String numberOfFrames) throws IOException {
         String referenceString = "";
         Integer reference;
