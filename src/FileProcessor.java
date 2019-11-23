@@ -2,7 +2,6 @@ import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 
 public class FileProcessor {
     private File file;
