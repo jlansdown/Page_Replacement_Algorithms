@@ -9,6 +9,7 @@ public class FileProcessor {
     private int numberOfReferences;
     private int arrayPosition = 0;
     private boolean testRandomTrials = false;
+    String numberOfFramesForRandomTrials = "";
 
     /**
      * @param jobFile
@@ -18,10 +19,11 @@ public class FileProcessor {
         this.numberOfReferences = 31;
     }
 
-    public FileProcessor(File jobFile, boolean randomTrials) {
+    public FileProcessor(File jobFile, String numberOfFrames, boolean randomTrials) {
         this.file = jobFile;
         this.numberOfReferences = 31;
         testRandomTrials = true;
+        this.numberOfFramesForRandomTrials = numberOfFrames;
     }
 
     /**
@@ -32,7 +34,7 @@ public class FileProcessor {
         int[] referencesAsIntegers = new int[this.numberOfReferences];
 
         if (testRandomTrials)
-            createRandomReferenceString();
+            createRandomReferenceString(this.numberOfFramesForRandomTrials);
 
         try {
             byte[] references = Files.readAllBytes(this.file.toPath());
@@ -49,16 +51,10 @@ public class FileProcessor {
         return referencesAsIntegers;
     }
 
-    private void createRandomReferenceString() throws IOException {
+    private void createRandomReferenceString(String numberOfFrames) throws IOException {
         String referenceString = "";
-        String numberOfFrames;
         Integer reference;
         ArrayList<String> fileContent = new ArrayList<>();
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter number of frames...\n" +
-                "3, 4, 5, 6: ");
-        numberOfFrames = scanner.nextLine();
 
         fileContent.add("NumberOfPageFramevalue:");
         fileContent.add(numberOfFrames);

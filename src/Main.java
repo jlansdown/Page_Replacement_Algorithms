@@ -33,49 +33,52 @@ public class Main {
         filename = scanner.nextLine();
         File jobFile = new File(filename + ".txt");
 
-        if (filename.equals("5"))
-            fileProcessor = new FileProcessor(jobFile, true);
-        else
+        if (filename.equals("5")) {
+
+            System.out.print("Enter number of frames...\n" +
+                    "3, 4, 5, 6: ");
+
+            String numberOfFramesForRandomTrials = scanner.nextLine();
+
+            for (int i = 0; i < trials; i++) {
+
+                fileProcessor = new FileProcessor(jobFile, numberOfFramesForRandomTrials, true);
+
+                convertedJobFile = fileProcessor.convertJobFileToArray();
+                numberOfFrames = convertedJobFile[0];
+
+                FifoPageManager fifo = new FifoPageManager(numberOfPages, numberOfFrames, pages);
+                fifoResult += fifo.getPageFaults();
+
+                LRUPageManager lru = new LRUPageManager(numberOfPages, numberOfFrames, pages);
+                lruResult += lru.getPageFaults();
+
+                OptimalPageManager opt = new OptimalPageManager(numberOfPages, numberOfFrames, pages);
+                optResult += opt.getPageFaults();
+            }
+
+            System.out.println(numberOfFramesForRandomTrials + "-frame fifo average: " + (fifoResult / trials));
+            System.out.println(numberOfFramesForRandomTrials + "-frame lru average: " + (lruResult / trials));
+            System.out.println(numberOfFramesForRandomTrials + "-frame opt average: " + (optResult / trials) + "\n\n");
+
+        } else {
             fileProcessor = new FileProcessor(jobFile);
 
-        convertedJobFile = fileProcessor.convertJobFileToArray();
-        numberOfFrames = convertedJobFile[0];
+            convertedJobFile = fileProcessor.convertJobFileToArray();
+            numberOfFrames = convertedJobFile[0];
 
-        for (int i = 0; i < numberOfPages; i++)
-            pages[i] = convertedJobFile[i+1];
-
-        FifoPageManager fifo = new FifoPageManager(numberOfPages, numberOfFrames, pages);
-        LRUPageManager lru = new LRUPageManager(numberOfPages, numberOfFrames, pages);
-        OptimalPageManager opt = new OptimalPageManager(numberOfPages, numberOfFrames, pages);
-
-        System.out.println("\n" + numberOfFrames + "-frame fifo: " + fifo.getPageFaults());
-        System.out.println(numberOfFrames + "-frame lru: " + lru.getPageFaults());
-        System.out.println(numberOfFrames + "-frame opt: " + opt.getPageFaults() + "\n");
-
-
-        /*
-        for (int i = 0; i < trials; i++) {
-
-
-            for (int j = 0; j < references; j++)
-                pages[j] = random.nextInt(10);
+            for (int i = 0; i < numberOfPages; i++)
+                pages[i] = convertedJobFile[i + 1];
 
             FifoPageManager fifo = new FifoPageManager(numberOfPages, numberOfFrames, pages);
-            fifoResult += fifo.getPageFaults();
-
             LRUPageManager lru = new LRUPageManager(numberOfPages, numberOfFrames, pages);
-            lruResult += lru.getPageFaults();
-
             OptimalPageManager opt = new OptimalPageManager(numberOfPages, numberOfFrames, pages);
-            optResult += opt.getPageFaults();
+
+            System.out.println("\n" + numberOfFrames + "-frame fifo: " + fifo.getPageFaults());
+            System.out.println(numberOfFrames + "-frame lru: " + lru.getPageFaults());
+            System.out.println(numberOfFrames + "-frame opt: " + opt.getPageFaults() + "\n");
+
         }
-
-        System.out.println(numberOfFrames + "-frame fifo average: " + (fifoResult / trials));
-        System.out.println(numberOfFrames + "-frame lru average: " + (lruResult / trials));
-        System.out.println(numberOfFrames + "-frame opt average: " + (optResult / trials) + "\n\n");
-
-
-         */
     }
 
     public static void main(String[] args) throws IOException {
