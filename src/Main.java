@@ -1,7 +1,5 @@
 import java.io.File;
 import java.io.IOException;
-
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -9,7 +7,7 @@ public class Main {
     /**
      *
      */
-    public static void printAverage() throws IOException {
+    public static void printAverages() throws IOException {
         int[] convertedJobFile;
         int[] pages = new int[30];
         int trials = 50;
@@ -17,6 +15,8 @@ public class Main {
         int numberOfFrames;
         int numberOfPages = pages.length;
         String filename;
+
+        FileProcessor fileProcessor;
 
 
         double fifoResult = 0;
@@ -33,7 +33,10 @@ public class Main {
         filename = scanner.nextLine();
         File jobFile = new File(filename + ".txt");
 
-        FileProcessor fileProcessor = new FileProcessor(jobFile);
+        if (filename.equals("5"))
+            fileProcessor = new FileProcessor(jobFile, true);
+        else
+            fileProcessor = new FileProcessor(jobFile);
 
         convertedJobFile = fileProcessor.convertJobFileToArray();
         numberOfFrames = convertedJobFile[0];
@@ -75,8 +78,9 @@ public class Main {
          */
     }
 
+    public static void () test
 
     public static void main(String[] args) throws IOException {
-        printAverage();
+        printAverages();
     }
 }
