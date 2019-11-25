@@ -17,3 +17,7 @@ There is no input validation implemented
 in this program, so please be careful
 when prompted for user input.
 -Thanks
+
+Github
+------
+https://github.com/rainko/Project2
